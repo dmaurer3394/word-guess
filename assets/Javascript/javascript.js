@@ -11,6 +11,7 @@ $(document).ready(function() {
     var newAnswer = answer.split("");
     var emptyWord = [];
     var countBlank = answer.length;
+    var letterInWord = false;
 
     // Logging the answer to the console
     console.log(answer);
@@ -25,6 +26,7 @@ $(document).ready(function() {
         emptyWord = [];
         countBlank = answer.length;
         console.log(answer);
+        createWord();
     }
 
     // setting wins and losses HTML
@@ -45,6 +47,7 @@ $(document).ready(function() {
 
     // create "li" elements of each letter in the answer
     function createWord() {
+        console.log(newAnswer);
         for (i = 0; i < newAnswer.length; i++) {
             emptyWord.push("_");
             document.getElementById("empty-word").innerHTML = emptyWord.join(" ");
@@ -54,7 +57,7 @@ $(document).ready(function() {
 
     function checkWord() {
         for (i = 0; i < answer.length; i++) {
-            if (guess === answer[i]) {
+            if (guess === answer[i] && letterInWord === false) {
                 emptyWord[i] = String.fromCharCode(event.keyCode).toLowerCase();
                 document.getElementById("empty-word").innerHTML = emptyWord.join(" ");
                 countBlank -= 1;
@@ -64,6 +67,15 @@ $(document).ready(function() {
             lives -= 1;
         }
         console.log(countBlank);
+    }
+
+    function checkLetter() {
+        console.log(guess);
+        for (i = 0; i < wrongArray.length; i++) {
+            if (guess === wrongArray[i]) {
+                letterInWord = true;
+            }
+        }
     }
 
     function endGame() {
@@ -82,6 +94,8 @@ $(document).ready(function() {
         wrongArray.push(guess);
         console.log(guess);
         console.log(wrongArray);
+        // checkLetter();
+        checkWord();
         if (countBlank === 0) {
             alert("You Win!");
             win++;
@@ -94,7 +108,7 @@ $(document).ready(function() {
         winsAndLosses();
         wrong();
         livesLeft();
-        checkWord();
+        letterInWord = false;
     }
 
     createWord();
