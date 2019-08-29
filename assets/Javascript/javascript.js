@@ -69,32 +69,12 @@ $(document).ready(function() {
         console.log(countBlank);
     }
 
-    function checkLetter() {
-        console.log(guess);
-        for (i = 0; i < wrongArray.length; i++) {
-            if (guess === wrongArray[i]) {
-                letterInWord = true;
-            }
-        }
-    }
-
-    function endGame() {
-        if (countBlank == 0) {
-            alert("You Win!");
-            resetGame();
-        } else if (lives == 0) {
-            alert("You lose!");
-            resetGame();
-        }
-    }
-
-
     document.onkeyup = function(event) {
         guess = String.fromCharCode(event.keyCode).toLowerCase();
+        document.getElementById("hide").style.display = "none";
         wrongArray.push(guess);
         console.log(guess);
         console.log(wrongArray);
-        // checkLetter();
         checkWord();
         if (countBlank === 0) {
             alert("You Win!");
@@ -108,7 +88,6 @@ $(document).ready(function() {
         winsAndLosses();
         wrong();
         livesLeft();
-        letterInWord = false;
     }
 
     createWord();
