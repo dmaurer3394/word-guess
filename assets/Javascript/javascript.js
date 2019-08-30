@@ -55,6 +55,7 @@ $(document).ready(function() {
         console.log(emptyWord);
     }
 
+    //checks for blanks in the word and counts down for each one that goes away
     function checkWord() {
         for (i = 0; i < answer.length; i++) {
             if (guess === answer[i] && letterInWord === false) {
@@ -69,6 +70,7 @@ $(document).ready(function() {
         console.log(countBlank);
     }
 
+    //on key function for imput and win/loss condition
     document.onkeyup = function(event) {
         guess = String.fromCharCode(event.keyCode).toLowerCase();
         document.getElementById("hide").style.display = "none";
@@ -89,7 +91,6 @@ $(document).ready(function() {
         wrong();
         livesLeft();
     }
-
     createWord();
     winsAndLosses();
     wrong();
